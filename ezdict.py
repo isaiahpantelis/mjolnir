@@ -22,11 +22,6 @@ class EZDict(dict):
     def __init__(self):
         super(EZDict, self).__init__()
 
-    # def __init__(self, d):
-    #
-    #     super(EZDict, self).__init__()
-    #     self = EZDict.from_dict(d)
-
     def __getattr__(self, item):
         return super(EZDict, self).get(item)
 
