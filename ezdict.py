@@ -23,10 +23,17 @@ class EZDict(dict):
         super(EZDict, self).__init__()
 
     def __getattr__(self, item):
+        # print(f'-- Fetching {item}')
         return super(EZDict, self).get(item)
 
     def __setattr__(self, key, value):
         return super(EZDict, self).__setitem__(key, value)
+
+    def __getstate__(self):
+        return self.__dict__
+
+    def __setstate__(self, d):
+        pass
 
     @classmethod
     def from_dict(cls, d: dict):

@@ -31,3 +31,11 @@ ezdd = EZDict.from_dict(dd)
 print(f'ezdd = {ezdd}')
 # Access a nested value
 print(f'ezdd.phones.work = {ezdd.phones.work}')
+
+# pickling
+import pickle
+
+pickled = pickle.dumps(ezdd)
+unpickled = pickle.loads(pickled)
+
+print(unpickled)
