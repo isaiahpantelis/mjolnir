@@ -66,4 +66,9 @@ for section, conts in ezcfg.items():
         print(f'    {key}: {val}')
         # print(f'    {type(key)}: {type(val)}')
 
-print(ezcfg.datain.xfolder)
+# ----------------------------------------------------------------------------------------------------------------------
+# Read a json file
+# ----------------------------------------------------------------------------------------------------------------------
+fpath = './config.json'
+ezcfg = EZConfig(fpath).read()
+print(ezcfg.files.paths.data.input)

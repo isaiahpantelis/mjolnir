@@ -1,4 +1,5 @@
 import configparser
+import json
 from ezdict import EZDict
 
 
@@ -17,14 +18,26 @@ class EZConfig:
 
     def __init__(self, fpath, interpolation='extended', sep='/'):
 
-        if interpolation == 'extended':
-            interpolation_obj = configparser.ExtendedInterpolation()
-        else:
-            interpolation_obj = configparser._UNSET
-
-        self.cfgparser = configparser.ConfigParser(interpolation=interpolation_obj)
         self.fpath = fpath
         self.sep = sep
+
+        ext = fpath.split('.')[-1]
+
+        if ext in ['ini', 'cfg']:
+
+            self.fintype = 'cfg'
+
+            if interpolation == 'extended':
+                interpolation_obj = configparser.ExtendedInterpolation()
+            else:
+                interpolation_obj = configparser._UNSET
+
+            self.cfgparser = configparser.ConfigParser(interpolation=interpolation_obj)
+
+        elif ext in ['json']:
+
+            self.fintype = 'json'
+            self.json_data = {}
 
     @staticmethod
     def _cast(x):
@@ -65,15 +78,22 @@ class EZConfig:
         :return:
         """
 
-        # Read the config file using the objects config parser that was created during initialisation.
-        self.cfgparser.read(self.fpath)
+        if self.fintype == 'cfg':
 
-        # Start building the return value of the function.
-        result = {}
+            # Read the config file using the objects config parser that was created during initialisation.
+            self.cfgparser.read(self.fpath)
 
-        for section in self.cfgparser.sections():
-            build(result, section.split(self.sep), {key: self._cast(val) for key, val in self.cfgparser[section].items()})
+            # Start building the return value of the function.
+            result = {}
 
-        result = EZDict.from_dict(result)
+            for section in self.cfgparser.sections():
+                build(result, section.split(self.sep),
+                      {key: self._cast(val) for key, val in self.cfgparser[section].items()})
+
+            result = EZDict.from_dict(result)
+
+        elif self.fintype == 'json':
+
+            result = EZDict.from_dict(json.load(open(self.fpath, 'r')))
 
         return result
