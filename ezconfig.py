@@ -2,6 +2,17 @@ import configparser
 from ezdict import EZDict
 
 
+def build(d: dict, L: list, data: dict):
+    if L:
+        if L[0] not in d.keys():
+            d[L[0]] = {}
+        build(d[L[0]], L[1:], data)
+    else:
+        # print(f'd = {d}')
+        # print(f'L = {L}')
+        d.update(data)
+
+
 class EZConfig:
 
     def __init__(self, fpath, interpolation='extended', sep='/'):
@@ -13,8 +24,10 @@ class EZConfig:
 
         self.cfgparser = configparser.ConfigParser(interpolation=interpolation_obj)
         self.fpath = fpath
+        self.sep = sep
 
-    def _cast(self, x):
+    @staticmethod
+    def _cast(x):
         """
         Auxiliary function used to cast strings read from the config file to more useful types. For example, it will
         convert any of the strings true, TRUE, True, etc, to True (bool).
@@ -41,7 +54,7 @@ class EZConfig:
         except ValueError:
             return x
 
-        return x
+        # return x
 
     def read(self):
         """
@@ -56,9 +69,11 @@ class EZConfig:
         self.cfgparser.read(self.fpath)
 
         # Start building the return value of the function.
-        tmp_dict = {}
+        result = {}
 
         for section in self.cfgparser.sections():
-            tmp_dict[section] = {key: self._cast(val) for key, val in self.cfgparser[section].items()}
+            build(result, section.split(self.sep), {key: self._cast(val) for key, val in self.cfgparser[section].items()})
 
-        return EZDict.from_dict(tmp_dict)
+        result = EZDict.from_dict(result)
+
+        return result
