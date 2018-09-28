@@ -1,5 +1,3 @@
 # mjolnir
 
-Handy tools for common tasks
-
-Work in progress
+https://the-mjolnir.readthedocs.io/en/latest/#
