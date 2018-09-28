@@ -21,8 +21,8 @@ print(f'ezd.first = {ezd.first}')
 dd = {'first': 'John',
       'last': 'Doe',
       'phones': {
-          'work': 416,
-          'home': 523
+          'work': 123 456 7890,
+          'home': 999 999 9999
       }}
 
 ezdd = EZDict.from_dict(dd)

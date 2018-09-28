@@ -1,4 +1,5 @@
 *~
+*.xml
 .gitignore
 .idea/
 __pycache__/
