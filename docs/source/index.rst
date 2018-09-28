@@ -7,6 +7,10 @@ mjolnir
 =======
 Handy tools for common tasks
 
+Config files for the lazy typist
+================================
+Work in progress
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
