@@ -7,8 +7,17 @@ mjolnir
 #######
 Handy tools for common tasks
 
-A config parser for the lazy typist
-===================================
+For the lazy typist
+===================
+
+Dictionary
+----------
+Work in progress
+
+.. autoclass:: ezdict.EZDict
+
+Config parser
+-------------
 Work in progress
 
 .. toctree::
