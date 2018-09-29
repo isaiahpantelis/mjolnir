@@ -18,6 +18,18 @@ There are obvious limitations:
 
 
 class EZDict(dict):
+    """
+    A class derived from the built-in `dict` that allows access to the dictionary values using the syntax for accessing
+    class attributes. For example, if ``d`` is an object of type ``EZDict`` and::
+
+        d = {key: value}
+
+    then ``value`` can be
+    accessed using either one of the following two ways:
+
+    #. ``d[key]`` (== value)
+    #. ``d.key`` (== value)
+    """
 
     def __init__(self):
         super(EZDict, self).__init__()

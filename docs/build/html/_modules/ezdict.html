@@ -169,6 +169,18 @@
 
 
 <div class="viewcode-block" id="EZDict"><a class="viewcode-back" href="../index.html#ezdict.EZDict">[docs]</a><span class="k">class</span> <span class="nc">EZDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class derived from the built-in `dict` that allows access to the dictionary values using the syntax for accessing</span>
+<span class="sd">    class attributes. For example, if ``d`` is an object of type ``EZDict`` and::</span>
+
+<span class="sd">        d = {key: value}</span>
+
+<span class="sd">    then ``value`` can be</span>
+<span class="sd">    accessed using either one of the following two ways:</span>
+
+<span class="sd">    #. ``d[key]`` (== value)</span>
+<span class="sd">    #. ``d.key`` (== value)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">EZDict</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>

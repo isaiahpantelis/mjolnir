@@ -169,7 +169,18 @@
 <dl class="class">
 <dt id="ezdict.EZDict">
 <em class="property">class </em><code class="descclassname">ezdict.</code><code class="descname">EZDict</code><a class="reference internal" href="_modules/ezdict.html#EZDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ezdict.EZDict" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>A class derived from the built-in <cite>dict</cite> that allows access to the dictionary values using the syntax for accessing
+class attributes. For example, if <code class="docutils literal"><span class="pre">d</span></code> is an object of type <code class="docutils literal"><span class="pre">EZDict</span></code> and:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>then <code class="docutils literal"><span class="pre">value</span></code> can be
+accessed using either one of the following two ways:</p>
+<ol class="arabic simple">
+<li><code class="docutils literal"><span class="pre">d[key]</span></code> (== value)</li>
+<li><code class="docutils literal"><span class="pre">d.key</span></code> (== value)</li>
+</ol>
+</dd></dl>
 
 </div>
 <div class="section" id="config-parser">
