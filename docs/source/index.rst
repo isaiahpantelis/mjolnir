@@ -4,11 +4,11 @@
    contain the root `toctree` directive.
 
 mjolnir
-=======
+#######
 Handy tools for common tasks
 
-Config files for the lazy typist
-================================
+A config parser for the lazy typist
+===================================
 Work in progress
 
 .. toctree::

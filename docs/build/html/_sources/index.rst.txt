@@ -4,8 +4,12 @@
    contain the root `toctree` directive.
 
 mjolnir
-=======
+#######
 Handy tools for common tasks
+
+A config parser for the lazy typist
+===================================
+Work in progress
 
 .. toctree::
    :maxdepth: 2
