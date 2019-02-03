@@ -14,6 +14,8 @@ Dictionary
 ----------
 Work in progress
 
+.. automodule:: ezdict
+
 .. autoclass:: ezdict.EZDict
 
 Config parser
