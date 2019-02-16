@@ -2,24 +2,61 @@ import configparser
 import json
 from ezdict import EZDict
 
+# ======================================================================================================================
 
-def build(d: dict, L: list, data: dict):
+
+def _build(d: dict, L: list, data: dict):
     if L:
         if L[0] not in d.keys():
             d[L[0]] = {}
-        build(d[L[0]], L[1:], data)
+        _build(d[L[0]], L[1:], data)
     else:
         # print(f'd = {d}')
         # print(f'L = {L}')
         d.update(data)
 
+# ======================================================================================================================
+
+
+def _cast(x):
+    """
+    Auxiliary function used to cast strings read from the config file to more useful types. For example, it will
+    convert any of the strings true, TRUE, True, etc, to True (bool).
+
+    :param x:
+    :return:
+    """
+
+    # -- At the moment, it is guaranteed that x is a string, however we may want to add a type check in the future
+    # -- or raise an exception.
+
+    # Logical
+    cases = ['true', 'yes', 'on']
+    if x.lower() in cases:
+        return True
+
+    cases = ['false', 'no', 'off']
+    if x.lower() in cases:
+        return False
+
+    try:
+        y = float(x)
+        return y if '.' in x else int(x)
+    except ValueError:
+        return x
+
+    # return x
+
+# ======================================================================================================================
+
 
 class EZConfig:
 
-    def __init__(self, fpath, interpolation='extended', sep='/'):
+    def __init__(self, fpath, interpolation='extended', sep='.'):
 
         self.fpath = fpath
         self.sep = sep
+        self._data = None
 
         ext = fpath.split('.')[-1]
 
@@ -37,39 +74,10 @@ class EZConfig:
         elif ext in ['json']:
 
             self.fintype = 'json'
-            self.json_data = {}
 
-    @staticmethod
-    def _cast(x):
-        """
-        Auxiliary function used to cast strings read from the config file to more useful types. For example, it will
-        convert any of the strings true, TRUE, True, etc, to True (bool).
+    # ------------------------------------------------------------------------------------------------------------------
 
-        :param x:
-        :return:
-        """
-
-        # At the moment, it is guaranteed that x is a string, however we may want to add a check in the future in case
-        # unexpected uses.
-
-        # Logical
-        cases = ['true', 'yes', 'on']
-        if x.lower() in cases:
-            return True
-
-        cases = ['false', 'no', 'off']
-        if x.lower() in cases:
-            return False
-
-        try:
-            y = float(x)
-            return y
-        except ValueError:
-            return x
-
-        # return x
-
-    def read(self):
+    def _read(self):
         """
         It returns a new object instead of adding data to self. The reason is that if the data read from the config file
         were added to self as a dictionary, then access with the '.' operator would involve one more arbitrarily named
@@ -78,7 +86,9 @@ class EZConfig:
         :return:
         """
 
-        if self.fintype == 'cfg':
+        JSON = 'json'
+
+        if self.fintype != JSON:
 
             # Read the config file using the objects config parser that was created during initialisation.
             self.cfgparser.read(self.fpath)
@@ -87,13 +97,27 @@ class EZConfig:
             result = {}
 
             for section in self.cfgparser.sections():
-                build(result, section.split(self.sep),
-                      {key: self._cast(val) for key, val in self.cfgparser[section].items()})
+                _build(result, section.split(self.sep),
+                       {key: _cast(val) for key, val in self.cfgparser[section].items()})
 
-            result = EZDict.from_dict(result)
+            self._data = EZDict.from_dict(result)
 
-        elif self.fintype == 'json':
+        else:
 
-            result = EZDict.from_dict(json.load(open(self.fpath, 'r')))
+            self._data = EZDict.from_dict(json.load(open(self.fpath, 'r')))
 
-        return result
+    # ------------------------------------------------------------------------------------------------------------------
+
+    @property
+    def data(self):
+        if self._data is not None:
+            print('-- File already loaded')
+            return self._data
+        else:
+            print('-- Loading file')
+            self._read()
+            return self._data
+
+    @data.setter
+    def data(self):
+        pass
