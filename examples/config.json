@@ -1,1 +1,8 @@
-{"files": {"paths": {"data": {"input": "x", "output": "y"}}}}
+{
+  "debugging": true,
+  "release": false,
+  "db": {
+    "ip": "127.0.0.0",
+    "port": 27017
+  }
+}

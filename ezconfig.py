@@ -79,11 +79,7 @@ class EZConfig:
 
     def _read(self):
         """
-        It returns a new object instead of adding data to self. The reason is that if the data read from the config file
-        were added to self as a dictionary, then access with the '.' operator would involve one more arbitrarily named
-        variable: self.X = ...
-
-        :return:
+        Called by `data.setter`; reads a file using the configparser and assigns the result to `self._data`.
         """
 
         JSON = 'json'
@@ -111,10 +107,10 @@ class EZConfig:
     @property
     def data(self):
         if self._data is not None:
-            print('-- File already loaded')
+            # print('-- File already loaded')
             return self._data
         else:
-            print('-- Loading file')
+            # print('-- Loading file')
             self._read()
             return self._data
 
