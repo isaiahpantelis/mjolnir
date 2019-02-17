@@ -153,30 +153,11 @@
 <span class="sd">date: 2018-07-29</span>
 <span class="sd">author: karatheodory@gmail.com</span>
 
-<span class="sd">This is a simple class derived from the python built-in `dict`; it&#39;s sole purpose is to function as a dictionary, but</span>
-<span class="sd">also provide access to the dictionary values using the dot operator:</span>
+<span class="sd">A simple class derived from the python built-in `dict` that allows access to the dictionary values using the syntax</span>
+<span class="sd">for attributes. Specifically, if `(key, val)` is an item in an `EZdict` `d`, then `val` can be accessed either by</span>
+<span class="sd">`d[key]` or by `d.key`.</span>
 
-<span class="sd">If `(key, val)` is an item in an `EZdict` `d`, then `val` can be accessed either by `d[key]` or by `d.key`.</span>
-
-<span class="sd">There are obvious limitations:</span>
-
-<span class="sd">    #.  For `d.key` to work `key` can only be such that `d.key` is a legal expression.</span>
-<span class="sd">    #.  For `d.key` to work *correctly*, `d.key` should refer to the same object as `d[key]`. Think, e.g., of `key`</span>
-<span class="sd">        being a string containing spaces.</span>
-<span class="sd">    #.  The function that internally dispatches `d.key` will *intercept method calls*. Therefore, for such method calls</span>
-<span class="sd">        to continue working with `EZdict` in the same way as with the built-in `dict`, they have to be added as</span>
-<span class="sd">        key-value pairs: (method name, reference to method implementation)</span>
-
-
-<span class="sd">For example, if ``d`` is an object of type ``EZDict`` and::</span>
-
-<span class="sd">    d = {key: value}</span>
-
-<span class="sd">then ``value`` can be</span>
-<span class="sd">accessed using either one of the following two ways:</span>
-
-<span class="sd">#. ``d[key]`` (== value)</span>
-<span class="sd">#. ``d.key`` (== value)</span>
+<span class="sd">There are obvious limitations, some of which are summarised in the file `examples/oddities.py`.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 

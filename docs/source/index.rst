@@ -22,6 +22,10 @@ Config parser
 -------------
 Work in progress
 
+.. automodule:: ezconfig
+
+.. autoclass:: ezconfig.EZConfig
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:

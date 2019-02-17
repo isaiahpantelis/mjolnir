@@ -168,30 +168,10 @@
 <p>Work in progress</p>
 <span class="target" id="module-ezdict"></span><p>date: 2018-07-29
 author: <a class="reference external" href="mailto:karatheodory&#37;&#52;&#48;gmail&#46;com">karatheodory<span>&#64;</span>gmail<span>&#46;</span>com</a></p>
-<p>This is a simple class derived from the python built-in <cite>dict</cite>; it’s sole purpose is to function as a dictionary, but
-also provide access to the dictionary values using the dot operator:</p>
-<p>If <cite>(key, val)</cite> is an item in an <cite>EZdict</cite> <cite>d</cite>, then <cite>val</cite> can be accessed either by <cite>d[key]</cite> or by <cite>d.key</cite>.</p>
-<p>There are obvious limitations:</p>
-<blockquote>
-<div><ol class="arabic simple">
-<li>For <cite>d.key</cite> to work <cite>key</cite> can only be such that <cite>d.key</cite> is a legal expression.</li>
-<li>For <cite>d.key</cite> to work <em>correctly</em>, <cite>d.key</cite> should refer to the same object as <cite>d[key]</cite>. Think, e.g., of <cite>key</cite>
-being a string containing spaces.</li>
-<li>The function that internally dispatches <cite>d.key</cite> will <em>intercept method calls</em>. Therefore, for such method calls
-to continue working with <cite>EZdict</cite> in the same way as with the built-in <cite>dict</cite>, they have to be added as
-key-value pairs: (method name, reference to method implementation)</li>
-</ol>
-</div></blockquote>
-<p>For example, if <code class="docutils literal"><span class="pre">d</span></code> is an object of type <code class="docutils literal"><span class="pre">EZDict</span></code> and:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>then <code class="docutils literal"><span class="pre">value</span></code> can be
-accessed using either one of the following two ways:</p>
-<ol class="arabic simple">
-<li><code class="docutils literal"><span class="pre">d[key]</span></code> (== value)</li>
-<li><code class="docutils literal"><span class="pre">d.key</span></code> (== value)</li>
-</ol>
+<p>A simple class derived from the python built-in <cite>dict</cite> that allows access to the dictionary values using the syntax
+for attributes. Specifically, if <cite>(key, val)</cite> is an item in an <cite>EZdict</cite> <cite>d</cite>, then <cite>val</cite> can be accessed either by
+<cite>d[key]</cite> or by <cite>d.key</cite>.</p>
+<p>There are obvious limitations, some of which are summarised in the file <cite>examples/oddities.py</cite>.</p>
 <dl class="class">
 <dt id="ezdict.EZDict">
 <em class="property">class </em><code class="descclassname">ezdict.</code><code class="descname">EZDict</code><a class="reference internal" href="_modules/ezdict.html#EZDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ezdict.EZDict" title="Permalink to this definition">¶</a></dt>
@@ -202,6 +182,11 @@ accessed using either one of the following two ways:</p>
 <div class="section" id="config-parser">
 <h3>Config parser<a class="headerlink" href="#config-parser" title="Permalink to this headline">¶</a></h3>
 <p>Work in progress</p>
+<span class="target" id="module-ezconfig"></span><dl class="class">
+<dt id="ezconfig.EZConfig">
+<em class="property">class </em><code class="descclassname">ezconfig.</code><code class="descname">EZConfig</code><span class="sig-paren">(</span><em>fpath</em>, <em>interpolation='extended'</em>, <em>sep='.'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ezconfig.html#EZConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ezconfig.EZConfig" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <div class="toctree-wrapper compound">
 </div>
 </div>
